@@ -1,0 +1,2 @@
+- start service (gunicorn?, mysql?, nginx?) past reboot
+- git push to remote server
