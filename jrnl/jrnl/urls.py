@@ -14,9 +14,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from blog.views import all_logs
+from blog.views import blog_main, all_logs
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', all_logs, name='all_logs'),
+    url(r'^dms(?P<num_station>(\d){3})/', all_logs, name='all_logs'),
+    url(r'^$', blog_main, name='blog_name'),
 ]
