@@ -7,10 +7,15 @@
 {% block body_block %}
 <div>
 <h2>Журнал сменного инженера</h2>
-Станция: {{site}}
+Станция: {{cur_site}}
 </div>
 <div style="float: left; width: 200px; background-color: #BBBBBB;">
 Навигация
+{% for site in sites.all %}
+	<div>
+		{{site.printout}}
+	</div>
+{% endfor %}
 </div>
 <div style="margin-left: 225px; background-color: #CCCCCC;">
 Все логи
