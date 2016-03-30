@@ -19,8 +19,8 @@ from blog.views import blog_main, all_logs
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^dms(?P<num_station>(\d){3})/', all_logs, name='all_logs'),
-    url(r'^dms797/', all_logs, {'site':'dms797'} ),
-    url(r'^dms774/', all_logs, {'site':'dms774'} ),
-    url(r'^dms726/', all_logs, {'site':'dms726'} ),
+    url(r'^dms797/', all_logs, {'site':'dms797'}, name='all_logs'),
+    url(r'^dms774/', all_logs, {'site':'dms774'}, name='all_logs'),
+    url(r'^dms726/', all_logs, {'site':'dms726'}, name='all_logs'),
     url(r'^$', blog_main, name='blog_name'),
 ]
