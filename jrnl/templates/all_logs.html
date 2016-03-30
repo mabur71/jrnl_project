@@ -14,5 +14,21 @@
 </div>
 <div style="margin-left: 225px; background-color: #CCCCCC;">
 Все логи
+<div>{{debug}}</div>
+{% for record in records.all %}
+	<div>
+		text: {{record.text}}
+	</div>
+{% endfor %}
+<nav>
+{% for p in paginator.page_range %}
+{% if p == page.number %}
+({{p}})
+{% else %}
+<a href="{{ paginator.baseurl }}{{ p }}">{{p}}</a>
+{% endif %}
+{% endfor %}
+</nav>
 </div>
+
 {% endblock%}

@@ -22,6 +22,16 @@ def all_logs(request, site):
 	site_set = ['dms797', 'dms726', 'dms774']
 	if site not in site_set:
 		raise Http404("Page not found")
+	records = Records.objects.filter(site__name = site)
+	limit = 10
+	page = request.GET.get('page', 1)
+	paginator = Paginator(records, limit)
+	paginator.baseurl = '/' + site + '/?page='
+	page = paginator.page(page)
 	return render(request, 'all_logs.html', {
-		'site' : site,
+		'site': site,
+		'records': page.object_list,
+		'paginator': paginator,
+		'page': page,
+		'debug': '',
 	})
