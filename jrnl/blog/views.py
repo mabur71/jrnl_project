@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from .models import Records
 
+import logging
+logger = logging.getLogger(__name__)
+
 # Create your views here.
 
 def test(request, *args, **kwargs):
@@ -15,6 +18,7 @@ def blog_main(request, *args, **kwargs):
 	return  HttpResponseRedirect('dms797/')
 
 def all_logs(request, num_station):
+	logger.debug("view:all_logs - debug Ok!")
 	dms_set = ['797', '726', '774']
 	if num_station not in dms_set:
 		raise Http404("Page not found")
