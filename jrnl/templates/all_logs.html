@@ -1,2 +1,18 @@
-<h2>template: all_logs.html<h2>
-Станция: {{num_station}}
+{% extends 'layout.html' %}
+
+{% block title_block %}
+Журнал сменного инженера
+{% endblock%}
+
+{% block body_block %}
+<div>
+<h2>Журнал сменного инженера</h2>
+Станция: {{site}}
+</div>
+<div style="float: left; width: 200px; background-color: #BBBBBB;">
+Навигация
+</div>
+<div style="margin-left: 225px; background-color: #CCCCCC;">
+Все логи
+</div>
+{% endblock%}

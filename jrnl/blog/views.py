@@ -17,11 +17,11 @@ def test(request, *args, **kwargs):
 def blog_main(request, *args, **kwargs):
 	return  HttpResponseRedirect('dms797/')
 
-def all_logs(request, num_station):
-	logger.debug("view:all_logs - debug Ok!")
-	dms_set = ['797', '726', '774']
-	if num_station not in dms_set:
+def all_logs(request, site):
+	#logger.debug("view:all_logs - debug Ok!")
+	site_set = ['dms797', 'dms726', 'dms774']
+	if site not in site_set:
 		raise Http404("Page not found")
 	return render(request, 'all_logs.html', {
-		'num_station' : num_station,
+		'site' : site,
 	})
