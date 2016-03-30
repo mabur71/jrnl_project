@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-class Site(models.Model):
+class Sites(models.Model):
 	name = models.CharField(max_length=20)
 	class Meta:
 		db_table = 'sites'
@@ -15,7 +15,7 @@ class Records(models.Model):
 	text = models.TextField()
 	person = models.CharField(max_length=20)
 	date = models.DateTimeField(auto_now_add=True)
-	site = models.ForeignKey(Site)
+	site = models.ForeignKey(Sites)
 	class Meta:
 		db_table = 'records'
 		ordering = ['-id']
