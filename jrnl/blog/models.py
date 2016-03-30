@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 class Sites(models.Model):
 	name = models.CharField(max_length=20)
+	printout = models.CharField(max_length=20)
 	class Meta:
 		db_table = 'sites'
 
