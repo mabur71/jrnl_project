@@ -22,6 +22,16 @@
 {# блок рабочих записей #}
 <div style="margin-left: 225px; background-color: #CCCCCC;">
 Все логи
+{% if page.number == 1 %}
+  <form method="post" action="/add_record/">
+    {% csrf_token %}
+    {{form.as_p}}
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Сохранить запись </button>
+    </div>
+  </form>
+{% endif %}
+
 <div>{{debug}}</div>
 {% for record in records.all %}
   <div style="border-width: 1px; border-color: #EEE; border-style: solid;">
