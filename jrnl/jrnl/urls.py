@@ -14,7 +14,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from blog.views import blog_main, all_logs
+from blog.views import blog_main, all_logs, add_log
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^dms774/', all_logs, {'site':'dms774'}, name='all_logs'),
     url(r'^dms726/', all_logs, {'site':'dms726'}, name='all_logs'),
     url(r'^$', blog_main, name='blog_name'),
+    url(r'^add_record/', add_log),
 ]

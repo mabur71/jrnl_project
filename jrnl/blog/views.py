@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from .models import Records, Sites
+from .forms import AddLogForm
 
 import logging
 logger = logging.getLogger(__name__)
@@ -30,11 +31,19 @@ def all_logs(request, site):
 	paginator = Paginator(records, limit)
 	paginator.baseurl = '/' + site + '/?page='
 	page = paginator.page(page)
+	form = AddLogForm(site=site)
 	return render(request, 'all_logs.html', {
 		'sites': sites,
 		'cur_site': site,
 		'records': page.object_list,
 		'paginator': paginator,
 		'page': page,
+		'form': form,
 		'debug': '',
 	})
+
+def add_log(request, site):
+	logger.debug("view: add_log")
+	if request.method == 'POST':
+		form = AddLogForm(request.POST, site=site)
+	return  HttpResponseRedirect(site + '/')
