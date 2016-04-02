@@ -24,23 +24,31 @@ def all_logs(request, site):
 	site_set = ['dms797', 'dms726', 'dms774']
 	if site not in site_set:
 		raise Http404("Page not found")
-	sites = Sites.objects.filter()
-	records = Records.objects.filter(site__name = site)
-	limit = 10
-	page = request.GET.get('page', 1)
-	paginator = Paginator(records, limit)
-	paginator.baseurl = '/' + site + '/?page='
-	page = paginator.page(page)
-	form = AddLogForm(site=site)
-	return render(request, 'all_logs.html', {
-		'sites': sites,
-		'cur_site': site,
-		'records': page.object_list,
-		'paginator': paginator,
-		'page': page,
-		'form': form,
-		'debug': '',
-	})
+	if request.method == "GET":
+		sites = Sites.objects.filter()
+		records = Records.objects.filter(site__name = site)
+		limit = 10
+		page = request.GET.get('page', 1)
+		paginator = Paginator(records, limit)
+		paginator.baseurl = '/' + site + '/?page='
+		page = paginator.page(page)
+		form = AddLogForm(site=site)
+		return render(request, 'all_logs.html', {
+			'sites': sites,
+			'cur_site': site,
+			'records': page.object_list,
+			'paginator': paginator,
+			'page': page,
+			'form': form,
+			'debug': '',
+		})
+	elif request.method == "POST":
+		form = AddLogForm(request.POST, site=site)
+		if form.is_valid():
+			record = form.save()
+		return  HttpResponseRedirect('/' + site + '/')
+	else:
+		return  HttpResponseRedirect('/' + site + '/')
 
 def add_log(request, site):
 	logger.debug("view: add_log")

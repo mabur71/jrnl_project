@@ -11,7 +11,7 @@ class AddLogForm(forms.Form):
 		text = self.cleaned_data['text']
 		return text
 	def clean_person(self):
-		person = self_cleaned_data['person']
+		person = self.cleaned_data['person']
 		return person
 	def save(self):
 		site_obj = Sites.objects.get(name=self.site)
