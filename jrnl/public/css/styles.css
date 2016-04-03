@@ -1,7 +1,13 @@
 .nav-sidebar > .active > a {
     background-color: #428bca;
     color: #fff;
-}.nav-sidebar > .inactive > a {
+}
+
+.nav-sidebar > .inactive > a {
     background-color: #b2bbca;
     color: #fff;
+}
+
+.nav-sidebar > li:hover >a:hover {
+    background-color: #99a;
 }
