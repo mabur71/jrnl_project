@@ -1,0 +1,7 @@
+.nav-sidebar > .active > a {
+    background-color: #428bca;
+    color: #fff;
+}.nav-sidebar > .inactive > a {
+    background-color: #b2bbca;
+    color: #fff;
+}

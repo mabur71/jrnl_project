@@ -1,61 +1,80 @@
 {% extends 'layout.html' %}
 
 {% block title_block %}
-Журнал сменного инженера
+Межстанционный журнал сменного инженера
 {% endblock%}
 
 {% block body_block %}
-<div>
-<h2>Журнал сменного инженера</h2>
-Станция: {{cur_site}}
-</div>
-{# блок навигации #}
-<div style="float: left; width: 200px; background-color: #BBBBBB;">
-Навигация
-{% for site in sites.all %}
+<div class="container">
   <div>
-    <a href="/{{site.name}}/">{{site.printout}}</a>
+    {#<div class>#}
+    <h2>Межстанционный журнал сменного инженера</h2>
+    {#Станция: {{cur_site}}#}
   </div>
-{% endfor %}
-</div>
 
-{# блок рабочих записей #}
-<div style="margin-left: 225px; background-color: #CCCCCC;">
-Все логи
-{% if page.number == 1 %}
-  <form method="post" action="/{{cur_site}}/">
-    {% csrf_token %}
-    {{form.as_p}}
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Сохранить запись </button>
+  <div class="row">
+    {# блок навигации #}
+    <div class="col-md-2 sidebar">
+      {#<div style="float: left; width: 200px; background-color: #BBBBBB;">#}
+      Навигация
+      {% for site in sites.all %}
+        <ul class="nav nav-sidebar">
+          {% if cur_site == site.name %}
+          <li class="active">
+          {% else %}
+          <li class="inactive">
+          {% endif %}
+            <a href="/{{site.name}}/">{{site.printout}}</a>
+          </li>
+        </ul>
+      {% endfor %}
     </div>
-  </form>
-{% endif %}
 
-<div>{{debug}}</div>
-{% for record in records.all %}
-  <div style="border-width: 1px; border-color: #EEE; border-style: solid;">
-    <form method="post" action="/{{cur_site}}/">
-      {% csrf_token %}
-      <textarea name="text">{{record.text}}</textarea> <br />
-      Инженер:<input id="id_person"  name="person" type="text" value="{{record.person}}" />
-      <input id="id_person"  name="id" type="hidden" value="{{record.id}}" /> <br />
-      {{record.date}}<br />
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Сохранить изменения </button>
-      </div>
-    </form>
+    {# блок рабочих записей #}
+    {#<div style="margin-left: 225px; background-color: #CCCCCC;" >#}
+    <div id="main-content" class="col-md-10">
+      Все логи
+      {% if page.number == 1 %}
+        <form method="post" action="/{{cur_site}}/">
+          {% csrf_token %}
+          {{form.as_p}}
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Сохранить запись </button>
+          </div>
+        </form>
+      {% endif %}
+
+      <div>{{debug}}</div>
+      {% for record in records.all %}
+        <div class="panel panel-default">
+        {#<div style="border-width: 1px; border-color: #EEE; border-style: solid;">#}
+          <form method="post" action="/{{cur_site}}/">
+            {% csrf_token %}
+            <textarea name="text">{{record.text}}</textarea> <br />
+            Инженер:<input id="id_person"  name="person" type="text" value="{{record.person}}" />
+            <input id="id_person"  name="id" type="hidden" value="{{record.id}}" /> <br />
+            {{record.date}}<br />
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Сохранить изменения </button>
+            </div>
+          </form>
+        </div>
+      {% endfor %}
+      <nav>
+      {% for p in paginator.page_range %}
+        {% if p == page.number %}
+          ({{p}})
+          {% else %}
+          <a href="{{ paginator.baseurl }}{{ p }}">{{p}}</a>
+          {% endif %}
+      {% endfor %}
+      </nav>
+    </div>
   </div>
-{% endfor %}
-<nav>
-{% for p in paginator.page_range %}
-  {% if p == page.number %}
-    ({{p}})
-    {% else %}
-    <a href="{{ paginator.baseurl }}{{ p }}">{{p}}</a>
-    {% endif %}
-{% endfor %}
-</nav>
+  <div class="row">
+    <div id="footer" class="span12">
+      &copy; Nobody! This document is placed in the public domain.
+    </div>  
+  </div>
 </div>
-
 {% endblock%}
