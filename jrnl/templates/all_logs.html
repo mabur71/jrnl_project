@@ -35,10 +35,16 @@
 <div>{{debug}}</div>
 {% for record in records.all %}
   <div style="border-width: 1px; border-color: #EEE; border-style: solid;">
-    text: {{record.text}} <br />
-    author: {{record.person}}<br />
-    <br />
-
+    <form method="post" action="/{{cur_site}}/">
+      {% csrf_token %}
+      <textarea name="text">{{record.text}}</textarea> <br />
+      Инженер:<input id="id_person"  name="person" type="text" value="{{record.person}}" />
+      <input id="id_person"  name="id" type="hidden" value="{{record.id}}" /> <br />
+      {{record.date}}<br />
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Сохранить изменения </button>
+      </div>
+    </form>
   </div>
 {% endfor %}
 <nav>

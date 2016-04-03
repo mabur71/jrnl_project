@@ -32,7 +32,7 @@ def all_logs(request, site):
 		paginator = Paginator(records, limit)
 		paginator.baseurl = '/' + site + '/?page='
 		page = paginator.page(page)
-		form = AddLogForm(site=site)
+		form = AddLogForm(site=site, id='')
 		return render(request, 'all_logs.html', {
 			'sites': sites,
 			'cur_site': site,
@@ -43,7 +43,8 @@ def all_logs(request, site):
 			'debug': '',
 		})
 	elif request.method == "POST":
-		form = AddLogForm(request.POST, site=site)
+		id = request.POST.get('id', '')
+		form = AddLogForm(request.POST, site=site, id=id)
 		if form.is_valid():
 			record = form.save()
 		return  HttpResponseRedirect('/' + site + '/')
