@@ -33,32 +33,36 @@
     {# блок рабочих записей #}
     {#<div style="margin-left: 225px; background-color: #CCCCCC;" >#}
     <div id="main-content" class="col-md-10">
-      Все логи
       {% if page.number == 1 %}
         <form method="post" action="/{{cur_site}}/">
           {% csrf_token %}
-          {{form.as_p}}
+            <div class="control-group">
+              <label class="control-label">Форма для добавления записи в журнал</label>
+              <div class="controls text_for_save">{{form.text}}</div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Служебный/Фамилия</label>
+              <div class="controls">{{form.person}}</div>
+            </div>
           <div class="form-actions">
             <button type="submit" class="btn btn-primary">Сохранить запись </button>
           </div>
         </form>
+      <br />
+      <h3>Предыдущие записи</h3>
       {% endif %}
-
+       
       <div>{{debug}}</div>
       {% for record in records.all %}
-        <div class="panel panel-default">
         {#<div style="border-width: 1px; border-color: #EEE; border-style: solid;">#}
           <form class="form-horizontal" method="post" action="/{{cur_site}}/">
             {% csrf_token %}
-            <textarea class="flow-control" rows="3" id="saved_text"  name="text">{{record.text}}</textarea> <br />
-            Инженер:<input id="id_person"  name="person" type="text" value="{{record.person}}" />
-            <input  class="flow-control" id="id_person"  name="id" type="hidden" value="{{record.id}}" /> <br />
-            {{record.date}}<br />
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary">Сохранить изменения </button>
-            </div>
+            {{record.date}}
+            <textarea class="flow-control saved_text" rows="3" name="text">{{record.text}}</textarea> <br />
+            <input  class="flow-control" id="id_person"  name="id" type="hidden" value="{{record.id}}" /> 
+            <input id="id_person"  name="person" type="text" value="{{record.person}}" />
+            <button type="submit" class="btn btn-xs btn-primary">Сохранить изменения </button>
           </form>
-        </div>
       {% endfor %}
       <nav>
       {% for p in paginator.page_range %}
@@ -73,7 +77,7 @@
   </div>
   <div class="row">
     <div id="footer" class="span12">
-      &copy; Nobody! This document is placed in the public domain.
+      {#&copy; Nobody! This document is placed in the public domain.#}
     </div>  
   </div>
 </div>

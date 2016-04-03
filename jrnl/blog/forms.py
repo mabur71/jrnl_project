@@ -6,7 +6,7 @@ class AddLogForm(forms.Form):
 		self.site = kwargs.pop('site')
 		self.id = kwargs.pop('id')
 		super(AddLogForm, self).__init__(*args, **kwargs)
-	text   = forms.CharField(widget=forms.Textarea)
+	text   = forms.CharField(widget=forms.Textarea(attrs={'rows': 5}))
 	person = forms.CharField(max_length = 20)
 	def clean_text(self):
 		text = self.cleaned_data['text']

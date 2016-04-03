@@ -11,3 +11,12 @@
 .nav-sidebar > li:hover >a:hover {
     background-color: #99a;
 }
+
+.saved_text {
+    min-width: 100%;
+}
+
+.text_for_save > textarea {
+    min-width: 100%;
+    rows: 5;
+}
