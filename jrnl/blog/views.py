@@ -21,7 +21,7 @@ def blog_main(request, *args, **kwargs):
 
 def all_logs(request, site):
 	#logger.debug("view:all_logs - debug Ok!")
-	site_set = ['dms797', 'dms726', 'dms774']
+	site_set = ['dms797', 'dms726', 'dms774','dms_troick']
 	if site not in site_set:
 		raise Http404("Page not found")
 	if request.method == "GET":

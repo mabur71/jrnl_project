@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^dms797/', all_logs, {'site':'dms797'}, name='all_logs'),
     url(r'^dms774/', all_logs, {'site':'dms774'}, name='all_logs'),
     url(r'^dms726/', all_logs, {'site':'dms726'}, name='all_logs'),
+    url(r'^dms_troick/', all_logs, {'site':'dms_troick'}, name='all_logs'),
     url(r'^$', blog_main, name='blog_name'),
     url(r'^add_record/', add_log),
 ]
