@@ -13,10 +13,13 @@ admin.site.register(Sites, SitesAdmin)
 
 
 class RecordsAdmin(admin.ModelAdmin):
-    def printout_site(self, obj):
+    def site_printout(self, obj):
         return obj.site.printout
-    list_display = ('date', 'printout_site', 'text','person',)
-    #list_editable = ('text', 'person')
+    site_printout.short_description = 'Station'
+    list_display = ('date', 'site', 'text','person',)
+    list_filter = ('site','person',)
+    search_fields = ['text']
+    list_editable = ('text', 'person')
     #list_select_related = ('site',)
     #list_select_related = True 
 

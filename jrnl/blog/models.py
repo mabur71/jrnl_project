@@ -10,6 +10,8 @@ class Sites(models.Model):
 	printout = models.CharField(max_length=20)
 	class Meta:
 		db_table = 'sites'
+	def __unicode__(self):
+		return self.printout
 
 
 class Records(models.Model):
