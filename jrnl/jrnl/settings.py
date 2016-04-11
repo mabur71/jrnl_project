@@ -146,3 +146,4 @@ USE_TZ = True
 STATIC_URL = '/'
 #STATIC_ROOT = "/home/operators/journal-project/jrnl/public/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'public')
+#Test
