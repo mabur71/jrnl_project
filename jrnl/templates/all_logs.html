@@ -54,10 +54,11 @@
        
       <div>{{debug}}</div>
       {% for record in records.all %}
+      <br />
         {#<div style="border-width: 1px; border-color: #EEE; border-style: solid;">#}
           <form class="form-horizontal" method="post" action="/{{cur_site}}/">
             {% csrf_token %}
-            {{record.date}}
+            <b>{{record.date}}</b>
             <textarea class="flow-control saved_text" rows="3" name="text">{{record.text}}</textarea> <br />
             <input  class="flow-control" id="id_person"  name="id" type="hidden" value="{{record.id}}" /> 
             <input id="id_person"  name="person" type="text" value="{{record.person}}" />
